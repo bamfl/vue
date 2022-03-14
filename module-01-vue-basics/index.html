@@ -10,7 +10,7 @@
         color: green;
       }
       .bold {
-        font-weight: 600;
+        font-weight: 800;
       }
       .danger {
         background: red;
@@ -32,36 +32,38 @@
         :style="{color: noteInputColor}"
         type="text"
       />
-      <button 
-        @click="addNote" 
-        :style="{background: buttonBackgroundColor, color: buttonTextColor}">
-        Добавить
-      </button>
+      <button @click="addNote" :style="{background: buttonBackgroundColor, color: buttonTextColor}">Добавить</button>
 
       <hr />
 
       <div v-if="notes.length" class="notes">
         <div v-for="(note, idx) in notes" :key="note.id">
-          <div 
-            :class="{primary: true, 'bold': note.title.length > 5}">
-            {{ toUpperCase(note.title) }}
-          </div>
+          <div :class="{primary: true, 'bold': note.title.length > 5}">{{ toUpperCase(note.title) }}</div>
 
-          <button
-            @click="removeNote($event, idx)"
-            :class="['danger', {white: note.title.length > 5}]"
-          >
-            Удалить
-          </button>
+          <button @click="removeNote($event, idx)" :class="['danger', {white: note.title.length > 5}]">Удалить</button>
         </div>
       </div>
 
-      <div v-else >
-        Заметок нет, создайте новую!
-      </div>
+      <div v-else>Заметок нет, создайте новую!</div>
 
       <div>Кол-во заметок: <span :class="notes.length > 0 ? 'primary' : ''">{{ count }}</span></div>
-      <div>Double кол-во заметок: <span>{{ doubleCount }}</ызфт></div>
+      <div>Double кол-во заметок: <span>{{ doubleCount }}</span></div>
+
+      <!-- Связывание inline-стилей -->
+      <!-- 1. Вынос объекта стилей -->
+      <h1 :style="headerStyle">Заголовок 1</h1>
+      <!-- 2. Использование объекта со стилями с JS логикой -->
+      <h2 :style="{color: notes.length > 1 ? 'blue' : 'red'}">Заголовок 2</h2>
+      <!-- 3. Использование нескольких стилей с помощью [] -->
+      <h2 :style="[headerStyle, {color: notes.length > 1 ? 'green' : 'red'}]">Заголовок 3</h2>
+
+      <!-- Связывание CSS-классов -->
+      <!-- 1. Использование объекта -->
+      <h1 :class="{primary: true, bold: notes.length > 5}">Заголовок 1</h1>
+      <!-- 2. Без использования объекта -->
+      <h1 :class="notes.length > 0 ? 'primary' : ''">Заголовок 2</h1>
+      <!-- 3. Использование  нескольких классов с помощью [] -->
+      <h1 :class="['primary', {bold: notes.length > 5}]">Заголовок 3</h1>
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>
