@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Модуль №3. Что еще есть во Vue</title>
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div v-cloak id="app">
+      <div class="div">
+        <h1>Directives</h1>
+
+        <h2 v-text="title"></h2>
+
+        <h2 v-once="title" v-text="title"></h2>
+        <button @click="title = 'New title'">Update title</button>
+
+        <h2 v-pre>{{ code }}</h2>
+
+        <h2 v-html="myHtml"></h2>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
