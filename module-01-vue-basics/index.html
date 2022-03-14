@@ -5,30 +5,63 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Module-01-vue-basics</title>
+    <style>
+      .primary {
+        color: green;
+      }
+      .bold {
+        font-weight: 600;
+      }
+      .danger {
+        background: red;
+      }
+      .white {
+        color: white;
+      }
+    </style>
   </head>
 
   <body>
     <div id="app">
-      <h1>Заметки</h1>
+      <h1 :style="headerStyle">Заметки</h1>
 
       <input
-        @input="bindInput"
+        v-model="noteInput"
         @keydown.enter="addNote"
-        :value="noteInput"
         :placeholder="notePlaceholder"
+        :style="{color: noteInputColor}"
         type="text"
       />
-      <button @click="addNote">Добавить</button>
+      <button 
+        @click="addNote" 
+        :style="{background: buttonBackgroundColor, color: buttonTextColor}">
+        Добавить
+      </button>
 
       <hr />
 
       <div v-if="notes.length" class="notes">
         <div v-for="(note, idx) in notes" :key="note.id">
-          <div>{{ toUpperCase(note.title) }}</div>
-          <button @click="removeNote($event, idx)">Удалить</button>
+          <div 
+            :class="{primary: true, 'bold': note.title.length > 5}">
+            {{ toUpperCase(note.title) }}
+          </div>
+
+          <button
+            @click="removeNote($event, idx)"
+            :class="['danger', {white: note.title.length > 5}]"
+          >
+            Удалить
+          </button>
         </div>
       </div>
-      <div v-else>Заметок нет, создайте новую!</div>
+
+      <div v-else >
+        Заметок нет, создайте новую!
+      </div>
+
+      <div>Кол-во заметок: <span :class="notes.length > 0 ? 'primary' : ''">{{ count }}</span></div>
+      <div>Double кол-во заметок: <span>{{ doubleCount }}</ызфт></div>
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>

@@ -4,6 +4,12 @@ const App = {
       noteInput: '',
       notePlaceholder: 'Текст заметки',
       notes: [],
+      headerStyle: {
+        color: 'orange',
+        fontSize: '25px'
+      },
+      buttonBackgroundColor: 'green',
+      buttonTextColor: 'white'
     };
   },
   methods: {
@@ -17,13 +23,28 @@ const App = {
       this.notes.splice(idx, 1);
       console.log(event);
     },
-    bindInput(event) {
-      this.noteInput = event.target.value;
-    },
     toUpperCase(str) {
       return str.toUpperCase();
+    },
+  },
+  computed: {
+    count() {
+      return this.notes.length;
+    },
+    doubleCount() {
+      return this.count * 2;
+    },
+    noteInputColor() {
+      return this.noteInput.length > 5 ? 'green' : 'red'
     }
   },
+  watch: {
+    noteInput(value) {
+      if (value === 'watch') {
+        console.log('watch');
+      }
+    }
+  }
 };
 
 Vue.createApp(App).mount('#app');
