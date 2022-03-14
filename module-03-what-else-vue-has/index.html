@@ -33,7 +33,7 @@
       </div>
 
       <div v-if="items.length" v-for="(item, idx) in items" :key="item">
-        <div @click="items.splice(idx, 1)">
+        <div @click="remove(idx), logRemoved(item)">
           <div>{{ item }} {{ idx }}</div>
           <input type="text" @click.stop />
         </div>
