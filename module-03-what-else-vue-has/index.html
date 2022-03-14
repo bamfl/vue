@@ -13,7 +13,7 @@
   </head>
   <body>
     <div v-cloak id="app">
-      <div class="div">
+      <div>
         <h1>Directives</h1>
 
         <h2 v-text="title"></h2>
@@ -25,6 +25,15 @@
 
         <h2 v-html="myHtml"></h2>
       </div>
+
+      <div v-if="items.length" v-for="(item, idx) in items" :key="item">
+        <div @click="items.splice(idx, 1)">
+          <div>{{ item }} {{ idx }}</div>
+          <input type="text" @click.stop>
+        </div>
+      </div>
+      <div v-else>Нет элементов</div>
+      <div v-show="!items.length">v-show</div>
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>
