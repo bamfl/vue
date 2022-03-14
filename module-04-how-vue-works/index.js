@@ -56,3 +56,11 @@ app.mount('#app');
 setTimeout(() => {
   app.unmount();
 }, 10000);
+
+const app2 = Vue.createApp({
+  data() {
+    return {
+      title: 'Заголовок 2'
+    }
+  }
+}).mount('#app2');
