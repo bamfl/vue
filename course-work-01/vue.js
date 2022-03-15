@@ -41,9 +41,7 @@ const App = {
       }
     },
     setActive(idx) {
-      if (idx === 0) {
-        this.isFinish = false;
-      }
+      this.isFinish = false;
       this.activeIndex = idx;
     },
   },
