@@ -11,14 +11,17 @@
   />
 
   <hr />
+
   <h2>Slots</h2>
+  <h3>Not-named slot:</h3>
   <SlotSimple />
   <SlotSimple>
     <p>Inner slot content</p>
   </SlotSimple>
 
-  <SlotsNamed></SlotsNamed>
-  <SlotsNamed>
+  <h3>Named:</h3>
+  <SlotNamed></SlotNamed>
+  <SlotNamed>
     <div>Not-named slot</div>
 
     <template v-slot:header>
@@ -33,12 +36,21 @@
     <template #footer>
       <div>Footer</div>
     </template>
-  </SlotsNamed>
+  </SlotNamed>
+
+  <h3>Именованные слоты с props</h3>
+  <SlotNamedWithProps>
+    <template v-slot:default="{ item, idx }">
+      <div>IDX:{{ idx }}</div>
+      <div>ITEM: {{ item }}</div>
+    </template>
+  </SlotNamedWithProps>
 </template>
 
 <script>
 import { computed } from 'vue';
-import SlotsNamed from './components/SlotsNamed.vue';
+import SlotNamedWithProps from './components/SlotNamedWithProps.vue';
+import SlotNamed from './components/SlotNamed.vue';
 import SlotSimple from './components/SlotSimple.vue';
 import NewsList from './components/NewsList.vue';
 import NewsInput from './components/NewsInput.vue';
@@ -49,7 +61,8 @@ export default {
     NewsList,
     NewsInput,
     SlotSimple,
-    SlotsNamed,
+    SlotNamed,
+    SlotNamedWithProps,
   },
   data() {
     return {
