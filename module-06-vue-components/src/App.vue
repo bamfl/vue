@@ -4,6 +4,7 @@
 
   <NewsInput @addNewsItem="addNewsItem" />
   <NewsList
+    ref="newsList"
     :openCount="openCount"
     :news="news"
     @removeNewsItem="removeNewsItem"
@@ -137,6 +138,7 @@ export default {
   },
   mounted() {
     this.activeTabComponentName = 'Two';
+    console.log(this.$refs.newsList);
   },
 };
 </script>
