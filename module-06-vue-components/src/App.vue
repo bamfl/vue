@@ -45,10 +45,35 @@
       <div>ITEM: {{ item }}</div>
     </template>
   </SlotNamedWithProps>
+
+  <hr />
+
+  <h2>Динамические и асинхронные компоненты</h2>
+  <h3>Tabs</h3>
+
+  <ToggleButton :status="activeTab === 'One' ? 'active' : ''" @btnClick="activeTab = 'One'">
+    One
+  </ToggleButton>
+
+  <ToggleButton :status="activeTab === 'Two' ? 'active' : ''" @btnClick="activeTab = 'Two'">
+    Two
+  </ToggleButton>
+
+  <div>
+    <TabOneContent v-if="activeTab === 'One'"></TabOneContent>
+    <TabTwoContent v-else-if="activeTab === 'Two'"></TabTwoContent>
+  </div>
+
+  <keep-alive>
+    <component :is="activeTabComponentName"></component>
+  </keep-alive>
 </template>
 
 <script>
 import { computed } from 'vue';
+import TabTwoContent from './components/TabTwoContent.vue';
+import TabOneContent from './components/TabOneContent.vue';
+import ToggleButton from './components/ToggleButton.vue';
 import SlotNamedWithProps from './components/SlotNamedWithProps.vue';
 import SlotNamed from './components/SlotNamed.vue';
 import SlotSimple from './components/SlotSimple.vue';
@@ -63,6 +88,9 @@ export default {
     SlotSimple,
     SlotNamed,
     SlotNamedWithProps,
+    ToggleButton,
+    TabOneContent,
+    TabTwoContent,
   },
   data() {
     return {
@@ -78,6 +106,7 @@ export default {
         },
       ],
       openCount: 0,
+      activeTab: 'One',
     };
   },
   provide() {
@@ -94,6 +123,11 @@ export default {
     },
     growOpenCounter(newOpenCount) {
       this.openCount = newOpenCount;
+    },
+  },
+  computed: {
+    activeTabComponentName() {
+      return `Tab${this.activeTab}Content`;
     },
   },
 };
