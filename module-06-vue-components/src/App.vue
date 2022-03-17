@@ -1,4 +1,6 @@
 <template>
+  <async-component></async-component>
+
   <h2>Актуальные новости на {{ now }}</h2>
   <h3>Открыто: {{ openCount }} раз</h3>
 
