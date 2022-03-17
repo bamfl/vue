@@ -126,9 +126,17 @@ export default {
     },
   },
   computed: {
-    activeTabComponentName() {
-      return `Tab${this.activeTab}Content`;
+    activeTabComponentName: {
+      get() {
+        return `Tab${this.activeTab}Content`;
+      },
+      set(value) {
+        this.activeTab = value;
+      },
     },
+  },
+  mounted() {
+    this.activeTabComponentName = 'Two';
   },
 };
 </script>
