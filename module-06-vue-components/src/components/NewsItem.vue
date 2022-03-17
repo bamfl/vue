@@ -1,17 +1,24 @@
 <template>
   <div class="row items-center">
     <h3>{{ newsItem.title }}</h3>
-    <button @click="toggleNewsItem" class="open">{{ isOpen ? 'Close' : 'Open' }}</button>
-    <button @click="removeNewsItem" class="delete">x</button>
+    <NewsButton @btnClick="toggleNewsItem" color="open">{{ isOpen ? 'Close' : 'Open' }}</NewsButton>
+    <NewsButton @btnClick="removeNewsItem" color="close">x</NewsButton>
   </div>
 
   <div v-if="isOpen">
     {{ newsItem.text }}
+    <hr />
+    <div>All news:</div>
+    <NewsItemList></NewsItemList>
   </div>
 </template>
 
 <script>
+import NewsItemList from './NewsItemList.vue';
+import NewsButton from './NewsButton.vue';
+
 export default {
+  components: { NewsButton, NewsItemList },
   name: 'NewsItem',
   emits: ['remove-news-item', 'grow-open-counter'],
   props: {
@@ -42,21 +49,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.delete {
-  cursor: pointer;
-  margin: 0 0 0 10px;
-  border-radius: 50%;
-  background: rgb(218, 59, 59);
-  color: white;
-  border: none;
-  width: 22px;
-  height: 22px;
-}
-.open {
-  background: rgb(19, 161, 119);
-  color: white;
-  margin: 0 0 0 10px;
-  cursor: pointer;
-}
-</style>
+<style lang="scss" scoped></style>

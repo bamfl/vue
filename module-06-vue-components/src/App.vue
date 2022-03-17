@@ -9,9 +9,37 @@
     @removeNewsItem="removeNewsItem"
     @growOpenCounter="growOpenCounter"
   />
+
+  <hr />
+  <h2>Slots</h2>
+  <SlotSimple />
+  <SlotSimple>
+    <p>Inner slot content</p>
+  </SlotSimple>
+
+  <SlotsNamed></SlotsNamed>
+  <SlotsNamed>
+    <div>Not-named slot</div>
+
+    <template v-slot:header>
+      <div>Header</div>
+    </template>
+
+    <template v-slot:text>
+      <div>Text</div>
+    </template>
+
+    <!-- v-slot: === # -->
+    <template #footer>
+      <div>Footer</div>
+    </template>
+  </SlotsNamed>
 </template>
 
 <script>
+import { computed } from 'vue';
+import SlotsNamed from './components/SlotsNamed.vue';
+import SlotSimple from './components/SlotSimple.vue';
 import NewsList from './components/NewsList.vue';
 import NewsInput from './components/NewsInput.vue';
 
@@ -20,6 +48,8 @@ export default {
   components: {
     NewsList,
     NewsInput,
+    SlotSimple,
+    SlotsNamed,
   },
   data() {
     return {
@@ -35,6 +65,11 @@ export default {
         },
       ],
       openCount: 0,
+    };
+  },
+  provide() {
+    return {
+      news: computed(() => this.news),
     };
   },
   methods: {
