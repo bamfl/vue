@@ -1,5 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import CustomInput from  './components/CustomInput.vue';
 import './theme.css'
 
-createApp(App).mount('#app')
+const app = createApp(App);
+app.component('custom-input', CustomInput);
+
+app.mount('#app')
