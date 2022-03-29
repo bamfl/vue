@@ -113,7 +113,6 @@
           <label>
             <input 
               v-model="agreement" 
-              value="Vuex" 
               type="checkbox" 
             /> 
               Согласен
