@@ -14,19 +14,15 @@
 
 <script>
 export default {
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'changeError'],
   props: {
     modelValue: String,
-  },
-  data() {
-    return {
-      nameError: null
-    }
+    nameError: String
   },
   methods: {
     change(event) {
-      event.target.value.length > 0 ? this.nameError = null : this.nameError = 'Имя не может быть путой строкой'
       this.$emit('update:modelValue', event.target.value);
+      this.$emit('changeError', event.target.value.length > 0 ? null : 'Имя не может быть путой строкой');
     },
   },
 };

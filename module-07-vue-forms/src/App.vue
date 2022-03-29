@@ -4,7 +4,11 @@
       <h1>Vue форма</h1>
 
       {{ name1 }}
-      <custom-input v-model="name1"></custom-input>
+      <custom-input 
+        v-model="name1" 
+        :nameError="nameError1"
+        @changeError="changeError"
+      ></custom-input>
     
       <div class="form-control">
         {{ name }}
@@ -161,12 +165,22 @@ export default {
       } 
     },
     isValidForm() {
+      let isValid = true;
+
       if (this.name.length === 0) {
         this.nameError = 'Имя не может быть путой строкой';
-
-        return false;
+        isValid = false;
       }
-      return true;
+
+      if (this.name1.length === 0) {
+        this.nameError1 = 'Имя не может быть путой строкой';
+        isValid = false;
+      }
+
+      return isValid;
+    },
+    changeError(err) {
+      this.nameError1 = err;
     }
   },
 };
