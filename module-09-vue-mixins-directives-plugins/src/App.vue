@@ -1,5 +1,13 @@
 <template>
   <div class="container">
+    <div class="card">
+      <div class="list-item">
+        <div class="btn primary" @click="changeLang('ru')">RU</div>
+        <div class="btn primary" @click="changeLang('en')">EN</div>
+      </div>
+      <h2>{{ $i18n('title') }}</h2>
+    </div>
+
     <div class="form-control">
       <input v-focus type="text" />
     </div>
@@ -25,6 +33,13 @@ export default {
   components: { AppAlert, AppAlert1 },
   directives: {
     focus: VFocus
+  },
+  inject: ['changeLangI18n'],
+  methods: {
+    changeLang(lang) {
+      this.changeLangI18n(lang);
+      this.$forceUpdate();
+    }
   }
 };
 </script>

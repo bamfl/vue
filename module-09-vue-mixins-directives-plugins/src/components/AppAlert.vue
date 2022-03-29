@@ -1,5 +1,6 @@
 <template>
   <div v-if="alert" class="alert primary">
+    <h2>{{ $i18n(lang, 'title') }}</h2>
     <h2>
       <slot name="title"></slot>
     </h2>
@@ -25,7 +26,7 @@
 import AlertMixin from '../mixins/AlertMixin.js';
 
 export default {
-  mixins: [AlertMixin]
+  mixins: [AlertMixin],
 };
 </script>
 
