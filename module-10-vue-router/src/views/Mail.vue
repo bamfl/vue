@@ -10,17 +10,14 @@
       </ul>
     </div>
     <div class="card-body">
-      <app-email-body :mailId="$route.params.mailId"></app-email-body>
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
-import AppEmailBody from '../components/AppEmailBody';
-
 export default {
   inject: ['emails', 'isAuth'],
-  components: { AppEmailBody },
   mounted() {
     if (!this.isAuth) {
       this.$router.push('/login');

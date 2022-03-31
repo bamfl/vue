@@ -13,12 +13,10 @@ export default {
   inject: ['isAuth'],
   mounted() {
     if (!this.isAuth) {
-      this.$router.push('/login')
+      this.$router.push('/login');
     }
-  }
-}
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
