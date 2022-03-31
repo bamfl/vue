@@ -4,12 +4,18 @@
 
     <p>Тут ты можешь перейти на любую страницу и почитать заранее заготовленные письма :)</p>
 
-    <a href="mail">To Mail</a>
+    <router-link to="mail">To Mail</router-link>
   </div>
 </template>
 
 <script>
 export default {
+  inject: ['isAuth'],
+  mounted() {
+    if (!this.isAuth) {
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 

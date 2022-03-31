@@ -11,13 +11,14 @@
       <input type="password" id="password" v-model="password">
     </div>
 
-    <button @click="$router.push('/dashboard')" class="btn primary" type="submit">Войти</button>
+    <button class="btn primary" :disabled="!isValid" type="submit">Войти</button>
     <button @click="$router.push('/forget')" class="btn warning" type="reset">Забыл пароль?</button>
   </form>
 </template>
 
 <script>
 export default {
+  inject: ['login'],
   data() {
     return {
       email: '',
@@ -32,7 +33,7 @@ export default {
   methods: {
     submit() {
       if (this.isValid) {
-        // login
+        this.login();
       }
     }
   }
