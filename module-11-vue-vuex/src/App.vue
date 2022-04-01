@@ -24,8 +24,8 @@ export default {
       this.$store.commit('increment');
     },
     addNumAsync() {
-      this.$store.dispatch('addAsync', {value: 100})
-    }
+      this.$store.dispatch('addAsync', { value: 100 });
+    },
   },
 };
 </script>
