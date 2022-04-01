@@ -16,7 +16,7 @@ export default createRouter({
         { path: ':mailId?', component: AppEmailBody, props: true }
       ]
     },
-    { path: '/:notFound(.*)', component: NotFound }
+    { path: '/:notFound(.*)*', component: NotFound }
   ],
   linkActiveClass: 'active',
 });

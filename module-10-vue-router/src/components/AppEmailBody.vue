@@ -14,11 +14,15 @@
 export default {
   inject: ['emails'],
   props: {
-    mailId: String | Number
+    mailId: String
   },
   computed: {
     mailTheme() {
-      return this.emails.find(email => email.id === +this.mailId).theme;
+      if (Number.isNaN(+this.mailId) || +this.mailId > this.emails.length) {
+        this.$router.push('/notFound');
+      } else {
+        return this.emails.find(email => email.id === +this.mailId).theme;        
+      }
     }
   }
 }
