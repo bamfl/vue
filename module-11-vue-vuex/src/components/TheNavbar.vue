@@ -10,10 +10,10 @@ import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['counter', 'doubleCounter']),
+    ...mapGetters('counter', ['counter', 'doubleCounter']),
   },
   methods: {
-    ...mapMutations(['addNum']),
+    ...mapMutations('counter', ['addNum']),
     // or
     // ...mapMutations(['addNum']),
     // addTen() {
