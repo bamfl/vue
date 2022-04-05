@@ -4,7 +4,7 @@
       <h1>Vue Composition Api</h1>
       <hr>
       <p>Название: <strong>{{ framework }}</strong></p>
-      <p>Версия: <strong>{{ version }}</strong></p>
+      <p>Версия: <strong>{{ version }} ({{ doubleVersion }}) ({{ tripleVersion }})</strong></p>
 
       <div class="row">
         <div class="mr-10">{{ car.year }}</div>
@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue';
+import { computed, reactive, ref } from 'vue';
 
 const framework = ref('VueJS');
 const version = ref(2);
@@ -36,6 +36,17 @@ const plane = reactive({
   passangers: 200,
   year: 2010
 })
+
+const doubleVersion = computed(() => version.value * 2); // ComputedRefImpl
+
+const tripleVersion = computed({
+  get() {
+    return version.value * 3;
+  },
+  set(value) {
+    console.log('tripleVersion set', value);
+  }
+});
 
 function changeInfo() {
   console.log(framework); // framework - RefImpl
@@ -52,5 +63,7 @@ function changeInfo() {
   console.log(plane.passangers); // plane.passangers - value
   plane.passangers = 150;
   plane.year = 2014;
+
+  tripleVersion.value = 100;
 }
 </script>
