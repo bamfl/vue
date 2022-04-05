@@ -67,6 +67,14 @@ h3 {
 /*    color: #e53935;*/
 /*}*/
 
+.row {
+  display: flex;
+}
+
+.mr-10 {
+  margin: 0 10px 0 0;
+}
+
 .btn {
     color: #42b983;
     position: relative;
