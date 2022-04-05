@@ -1,6 +1,8 @@
 <template>
   <div class="container">
     <div class="card">
+      {{ title }}
+
       <AppInfo
         :framework="framework"
         :version="version"
@@ -45,8 +47,11 @@
 </template>
 
 <script setup>
-import { reactive, ref, watch } from 'vue';
+import { reactive, ref, watch, provide } from 'vue';
 import AppInfo from './components/AppInfo.vue';
+
+const title = ref('Hello from provide');
+provide('title', title);
 
 const name = ref(null);
 const age = ref('');
@@ -92,6 +97,7 @@ function changeInfo() {
   console.log(plane.passangers); // plane.passangers - value
   plane.passangers = 150;
   plane.year = 2014;
+  title.value = 'Hello from provide!!!';
 }
 
 function getName() {

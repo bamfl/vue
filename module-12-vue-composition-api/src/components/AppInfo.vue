@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <h1>Vue Composition Api</h1>
+    <h1>Vue Composition Api. {{ title }}</h1>
     {{ props.framework }}
     <hr>
     <p>
@@ -33,12 +33,21 @@
       Изменить
     </button>
 
+    <button
+      class="btn"
+      @click="changeTitle"
+    >
+      Изменить заголовок
+    </button>
+
     <br><br>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, inject, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted } from 'vue';
+
+const title = inject('title');
 
 const props = defineProps({
   framework: {
@@ -75,6 +84,23 @@ const tripleVersion = computed({
 function change() {
   emit('changeInfo');
 }
+
+function changeTitle() {
+  title.value = 'Hihihihi';
+}
+
+// Lifecycle Hooks:
+onBeforeMount(() => console.log('onBeforeMount'));
+
+onMounted(() => console.log('onMounted'));
+
+onBeforeUpdate(() => console.log('onBeforeUpdate'));
+
+onUpdated(() => console.log('onUpdated'));
+
+onBeforeUnmount(() => console.log('onBeforeUnmount'));
+
+onUnmounted(() => console.log('onUnmounted'));
 </script>
 
 <style lang="scss" scoped></style>
