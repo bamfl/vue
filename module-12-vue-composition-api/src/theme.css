@@ -75,6 +75,10 @@ h3 {
   margin: 0 10px 0 0;
 }
 
+.my-10 {
+  margin: 10px;
+}
+
 .btn {
     color: #42b983;
     position: relative;
