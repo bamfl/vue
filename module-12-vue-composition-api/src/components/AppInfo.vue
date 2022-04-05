@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <h1>Vue Composition Api. {{ title }}</h1>
+    <h1>{{ title }}</h1>
     {{ props.framework }}
     <hr>
     <p>
