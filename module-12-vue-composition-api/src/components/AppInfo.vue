@@ -90,6 +90,8 @@ function changeTitle() {
 }
 
 // Lifecycle Hooks:
+console.log('created');
+
 onBeforeMount(() => console.log('onBeforeMount'));
 
 onMounted(() => console.log('onMounted'));
