@@ -1,48 +1,52 @@
 <template>
   <div class="container">
     <div class="card">
-      <h1>Vue Composition Api</h1>
-      <hr />
-      <p>
-        Название: <strong>{{ framework }}</strong>
-      </p>
-      <p>
-        Версия: <strong>{{ version }} ({{ doubleVersion }}) ({{ tripleVersion }})</strong>
-      </p>
-
-      <div class="row">
-        <div class="mr-10">{{ car.year }}</div>
-        <div>{{ car.brand }}</div>
-      </div>
-
-      <div class="row">
-        <div class="mr-10">{{ plane.passangers }}</div>
-        <div>{{ plane.year }}</div>
-      </div>
-
-      <button class="btn" @click="changeInfo">Изменить</button>
-
-      <br /><br />
+      <AppInfo
+        :framework="framework"
+        :version="version"
+        :car="car"
+        :plane="plane"
+        @change-info="changeInfo"
+      />
 
       <div class="form-control">
-        <input type="text" ref="name" />
+        <label for="name"><input
+          id="name"
+          ref="name"
+          type="text"
+        ></label>
       </div>
 
-      <button class="btn" @click="getName">Get name</button>
+      <button
+        class="btn"
+        @click="getName"
+      >
+        Get name
+      </button>
 
-      <br /><br />
+      <br><br>
 
       <div class="form-control">
-        <input type="number" v-model="age" />
+        <label for="age"><input
+          id="age"
+          v-model="age"
+          type="number"
+        ></label>
       </div>
 
-      <button class="btn" @click="getAge">Get age</button>
+      <button
+        class="btn"
+        @click="getAge"
+      >
+        Get age
+      </button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, reactive, ref, watch } from 'vue';
+import { reactive, ref, watch } from 'vue';
+import AppInfo from './components/AppInfo.vue';
 
 const name = ref(null);
 const age = ref('');
@@ -58,17 +62,6 @@ const car = ref({
 const plane = reactive({
   passangers: 200,
   year: 2010,
-});
-
-const doubleVersion = computed(() => version.value * 2); // ComputedRefImpl
-
-const tripleVersion = computed({
-  get() {
-    return version.value * 3;
-  },
-  set(value) {
-    console.log('tripleVersion set', value);
-  },
 });
 
 // watch(framework, (newVal, oldVal) => {
@@ -99,8 +92,6 @@ function changeInfo() {
   console.log(plane.passangers); // plane.passangers - value
   plane.passangers = 150;
   plane.year = 2014;
-
-  tripleVersion.value = 100;
 }
 
 function getName() {
