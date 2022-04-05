@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { computed, reactive, ref } from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
 
 const framework = ref('VueJS');
 const version = ref(2);
@@ -46,6 +46,19 @@ const tripleVersion = computed({
   set(value) {
     console.log('tripleVersion set', value);
   }
+});
+
+// watch(framework, (newVal, oldVal) => {
+//   console.log('framework', newVal, oldVal);
+// });
+
+// watch(version, (newVal, oldVal) => {
+//   console.log('version', newVal, oldVal);
+// });
+
+watch([framework, version], (newValues, oldValues) => {
+  console.log('framework', newValues[0], oldValues[0]);
+  console.log('version', newValues[1], oldValues[1]);
 });
 
 function changeInfo() {
