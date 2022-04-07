@@ -1,7 +1,7 @@
 import { ref } from 'vue';
 
-export default function useAlert() {
-  const alert = ref(false);
+export default function useAlert(visibility = false) {
+  const alert = ref(visibility);
 
   function toggle() {
     alert.value = !alert.value;

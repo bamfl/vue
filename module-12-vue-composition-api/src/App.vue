@@ -1,6 +1,16 @@
 <template>
   <header class="navbar">
-    <div>Vue Composition Api</div>
+    <div>Vue Composition Api.</div>
+
+    <div>
+      Counter: {{ counter }} ({{ doubleCounter }})
+      <button
+        class="btn primary"
+        @click="increment"
+      >
+        Increment
+      </button>
+    </div>
 
     <ul class="navbar-menu">
       <li>
@@ -22,4 +32,13 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+
+const store = useStore();
+
+const counter = computed(() => store.state.counter);
+const doubleCounter = computed(() => store.getters.doubleCounter);
+const increment = (() => store.commit('increment'));
+
 </script>

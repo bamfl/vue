@@ -65,7 +65,7 @@ import useAlert from '../use/useAlert';
 import AppAlert from '../components/AppAlert.vue';
 import AppInfo from '../components/AppInfo.vue';
 
-const { alert, toggle, close } = useAlert();
+const { alert, toggle, close } = useAlert(true);
 
 const title = ref('Hello from provide');
 provide('title', title);

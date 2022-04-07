@@ -7,20 +7,14 @@
     Attention!
   </AppAlert>
 
-  <button
-    class="btn primary"
-    @click="toggle"
-  >
-    {{ alert ? 'Close' : 'Open' }} Alert
-  </button>
-
-  <br><br>
-
   <div class="card">
     <h2>Переиспользование</h2>
 
-    <button class="btn primary">
-      Показать сообщение
+    <button
+      class="btn primary"
+      @click="toggle"
+    >
+      {{ alert ? 'Close' : 'Open' }} Alert
     </button>
 
     <button
