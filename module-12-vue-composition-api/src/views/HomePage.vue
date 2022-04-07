@@ -1,4 +1,21 @@
 <template>
+  <AppAlert
+    v-if="alert"
+    type="primary"
+    @close="close"
+  >
+    Attention!
+  </AppAlert>
+
+  <button
+    class="btn primary"
+    @click="toggle"
+  >
+    {{ alert ? 'Close' : 'Open' }} Alert
+  </button>
+
+  <br><br>
+
   <div class="card">
     <AppInfo
       :framework="framework"
@@ -44,7 +61,11 @@
 
 <script setup>
 import { reactive, ref, watch, provide } from 'vue';
+import useAlert from '../use/useAlert';
+import AppAlert from '../components/AppAlert.vue';
 import AppInfo from '../components/AppInfo.vue';
+
+const { alert, toggle, close } = useAlert();
 
 const title = ref('Hello from provide');
 provide('title', title);
