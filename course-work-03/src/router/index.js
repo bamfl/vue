@@ -15,6 +15,10 @@ const routes = [
     path: '/task/:taskId',
     component: () => import('../views/TaskPage'),
     props: true
+  },
+  {
+    path: '/:notFound(.*)*',
+    redirect: '/'
   }
 ]
 

@@ -17,6 +17,9 @@ export default createStore({
     },
     activeTasks(state) {
       return state.tasks.filter(task => task.status === 'active')
+    },
+    filteredByStatusTodos(state) {
+      return filterStatus => state.tasks.filter(task => task.status === filterStatus)
     }
   },
   mutations: {

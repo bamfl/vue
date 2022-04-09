@@ -18,12 +18,9 @@
 
 <script setup>
 import { onMounted, computed } from 'vue'
-import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import AppStatus from '../components/AppStatus'
 
-const route = useRoute()
-console.log(route)
 const props = defineProps({
   taskId: {
     type: String,
