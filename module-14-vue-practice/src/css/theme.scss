@@ -63,8 +63,24 @@ h3 {
 /*    color: #42b983;*/
 /*}*/
 
+.row {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
 .danger {
     color: #e53935;
+}
+
+.mr-24 {
+  margin: 0 24px 0 0;
 }
 
 .btn {
@@ -160,6 +176,7 @@ h3 {
     padding: 0.5rem 1.5rem;
     border-radius: 3px;
     font-size: 1rem;
+    height: 40px;
     resize: none;
 }
 
@@ -422,7 +439,7 @@ h3 {
     padding: 0 .5rem;
 }
 
-.badge.primary {
+.badge.done, .badge.active {
     border-color: #3eaf7c;
     color: #3eaf7c;
 }
@@ -432,9 +449,14 @@ h3 {
     color: #e53935;
 }
 
-.badge.warning {
+.badge.cancelled {
     border-color: #c25205;
     color: #c25205;
+}
+
+.badge.pending {
+    border-color: #efeb13;
+    color: #d0d629;
 }
 
 .text-white {
@@ -522,4 +544,10 @@ h3 {
 
 .question-title {
     font-weight: bold;
+}
+
+.orders-table {
+  width: 100%;
+  text-align: center;
+  border-spacing: 10px;
 }

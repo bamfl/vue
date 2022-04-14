@@ -1,6 +1,7 @@
 <template>
   <div :class="['alert', props.type]">
-    <p><slot /></p>
+    <h3><slot name="title" /></h3>
+    <p><slot name="text" /></p>
     <div class="alert-close" @click="$emit('close-alert')">x</div>
   </div>
 </template>

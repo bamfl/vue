@@ -1,6 +1,5 @@
 <template>
   <MainHeader @open-messages="isMassagesOpen = true" />
-  <div class="card">{{ isAuth }}</div>
 
   <router-view />
 

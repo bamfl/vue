@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <form @submit.prevent="submit">
+    <form @submit.prevent="submit" autocomplete="off">
       <div class="form-control">
         <label>Введите email</label>
         <input v-model="email" @input="validateEmail" type="text" />
@@ -86,10 +86,6 @@ function submit(): void {
         } else {
           router.push('/orders')
         }
-      })
-      .finally(() => {
-        email.value = ''
-        password.value = ''
       })
   }
 }

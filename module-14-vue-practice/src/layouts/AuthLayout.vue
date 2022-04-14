@@ -1,5 +1,8 @@
 <template>
-  <AppAlert v-if="alert" type="danger" @close-alert="alert = null">{{ alert }}</AppAlert>
+  <AppAlert v-if="alert" type="danger" @close-alert="alert = null">
+    <template #title>Ошибка!</template>
+    <template #text>{{ alert }}</template>
+  </AppAlert>
 
   <AuthForm :alert="alert" @set-alert="setAlert" />
 </template>
