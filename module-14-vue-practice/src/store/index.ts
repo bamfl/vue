@@ -38,9 +38,14 @@ export const store = createStore<State>({
         })
 
         const authObj = await response.json()
+        localStorage.setItem('isAuth', JSON.stringify(authObj))
+
+        if (!response.ok) {
+          console.error(`${response.status}`)
+          return authObj
+        }
 
         state.isAuth = true
-        localStorage.setItem('isAuth', JSON.stringify(authObj))
       } catch (error) {
         console.error(error)
       }

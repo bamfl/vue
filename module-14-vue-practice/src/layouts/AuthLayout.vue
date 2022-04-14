@@ -1,38 +1,18 @@
 <template>
-  <div class="card">
-    <form @submit.prevent="submit">
-      <div class="form-control">
-        <label for="email">Введите email</label>
-        <input v-model="email" id="email" type="text" />
-      </div>
-      <div class="form-control">
-        <label for="password">Введите пароль</label>
-        <input v-model="password" id="password" type="password" />
-      </div>
+  <AppAlert v-if="alert" type="danger" @close-alert="alert = null">{{ alert }}</AppAlert>
 
-      <button class="btn primary">Вход</button>
-    </form>
-  </div>
+  <AuthForm :alert="alert" @set-alert="setAlert" />
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useStore } from '../store'
+import AuthForm from '../components/AuthForm.vue'
+import AppAlert from '../components/AppAlert.vue'
+import { Ref, ref } from 'vue'
 
-const store = useStore()
-const router = useRouter()
+const alert: Ref<string> | Ref<null> = ref(null)
 
-const email = ref('')
-const password = ref('')
-
-function submit(): void {
-  store.dispatch('login', {
-    email: email.value,
-    password: password.value
-  }).then(() => {
-    router.push('/orders')
-  })
+function setAlert(value: string) {
+  alert.value = value
 }
 </script>
 
