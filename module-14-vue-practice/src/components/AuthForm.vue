@@ -58,7 +58,7 @@ function validatePassword(): boolean {
   }
 
   if (password.value.length < 6) {
-    passwordError.value = 'Минимальная длина пароля 8 символов'
+    passwordError.value = 'Минимальная длина пароля 6 символов'
     return false
   }
 
