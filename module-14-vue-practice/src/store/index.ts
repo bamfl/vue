@@ -1,14 +1,17 @@
 import { InjectionKey } from 'vue'
 import { createStore, useStore as baseUseStore, Store } from 'vuex'
-import { order } from '../types/index'
+import { IOrder } from '../types/index'
 
 const apiKey = 'AIzaSyCTOYz0LELsqdrezrHU7X3K1ZSyY_iNjxg'
 const loginEndpoint = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`
-let idToken: null | string = null
-
+const baseUrl = 'https://vue-bank-e9995-default-rtdb.europe-west1.firebasedatabase.app'
+const endpoints = {
+  orders: `${baseUrl}/orders.json`
+}
 export interface State {
   isAuth: boolean
-  users: order[]
+  orders: IOrder[]
+  idToken: null | string
 }
 
 // eslint-disable-next-line symbol-description
@@ -17,11 +20,20 @@ export const key: InjectionKey<Store<State>> = Symbol()
 export const store = createStore<State>({
   state: {
     isAuth: JSON.parse(localStorage.getItem('isAuth') as string)?.registered || false,
-    users: []
+    orders: [],
+    idToken: JSON.parse(localStorage.getItem('isAuth') as string)?.idToken || null
   },
   getters: {
     isAuth(state) {
       return state.isAuth
+    },
+    orders(state) {
+      return state.orders
+    },
+    filteredOrderes(state) {
+      return (filterConditionsFunction: (T: IOrder) => boolean) => {
+        return state.orders.filter(order => filterConditionsFunction(order))
+      }
     }
   },
   mutations: {
@@ -42,8 +54,7 @@ export const store = createStore<State>({
         })
 
         const authObj = await response.json()
-        idToken = authObj.idToken
-        console.log(idToken)
+        state.idToken = authObj.idToken
 
         localStorage.setItem('isAuth', JSON.stringify(authObj))
 
@@ -61,9 +72,46 @@ export const store = createStore<State>({
       state.isAuth = false
       localStorage.removeItem('isAuth')
     },
-    async getUsers({ state }) {
-      const response = await fetch(`https://vue-bank-e9995-default-rtdb.europe-west1.firebasedatabase.app/orders.json?auth=${idToken}`)
-      state.users = await response.json()
+    async getOrders({ state, dispatch }): Promise<void> {
+      try {
+        const response = await fetch(`${endpoints.orders}?auth=${state.idToken}`)
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            dispatch('logout')
+          }
+          console.error(`${response.status}`)
+          return
+        }
+
+        const ordersData = await response.json()
+
+        state.orders = []
+
+        Object.keys(ordersData).forEach(key => {
+          state.orders.push({ id: key, ...ordersData[key] })
+        })
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async createOrder({ state }, orderObj: IOrder): Promise<void> {
+      const response = await fetch(`${endpoints.orders}?auth=${state.idToken}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderObj)
+      })
+
+      if (!response.ok) {
+        console.error(`${response.status}`)
+        return
+      }
+
+      const { name: id } = await response.json()
+
+      state.orders.push({ id, ...orderObj })
     }
   }
 })
