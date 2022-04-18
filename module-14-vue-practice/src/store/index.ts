@@ -6,7 +6,7 @@ const apiKey = 'AIzaSyCTOYz0LELsqdrezrHU7X3K1ZSyY_iNjxg'
 const loginEndpoint = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`
 const baseUrl = 'https://vue-bank-e9995-default-rtdb.europe-west1.firebasedatabase.app'
 const endpoints = {
-  orders: `${baseUrl}/orders.json`
+  orders: `${baseUrl}/orders`
 }
 export interface State {
   isAuth: boolean
@@ -74,7 +74,7 @@ export const store = createStore<State>({
     },
     async getOrders({ state, dispatch }): Promise<void> {
       try {
-        const response = await fetch(`${endpoints.orders}?auth=${state.idToken}`)
+        const response = await fetch(`${endpoints.orders}.json?auth=${state.idToken}`)
 
         if (!response.ok) {
           if (response.status === 401) {
@@ -96,7 +96,7 @@ export const store = createStore<State>({
       }
     },
     async createOrder({ state }, orderObj: IOrder): Promise<void> {
-      const response = await fetch(`${endpoints.orders}?auth=${state.idToken}`, {
+      const response = await fetch(`${endpoints.orders}.json?auth=${state.idToken}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -112,6 +112,40 @@ export const store = createStore<State>({
       const { name: id } = await response.json()
 
       state.orders.push({ id, ...orderObj })
+    },
+    async changeOrderStatus({ state }, { id, updatedOrder }) {
+      const response = await fetch(`${endpoints.orders}/${id}/.json?auth=${state.idToken}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedOrder)
+      })
+
+      if (!response.ok) {
+        console.error(`${response.status}`)
+        return
+      }
+
+      let order = state.orders.find(order => order.id === id)
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      order = updatedOrder
+    },
+    async deleteOrder({ state }, { id }) {
+      const response = await fetch(`${endpoints.orders}/${id}/.json?auth=${state.idToken}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (!response.ok) {
+        console.error(`${response.status}`)
+        return
+      }
+
+      state.orders = state.orders.filter(order => order.id !== id)
     }
   }
 })

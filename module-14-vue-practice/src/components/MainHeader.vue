@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <div>Bank</div>
+    <h3>Bank</h3>
     <ul class="navbar-menu">
       <router-link to="/orders" :class="{ active: $route.path === '/' }">Заявки</router-link>
       <router-link to="/help">Помощь</router-link>

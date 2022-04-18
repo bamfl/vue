@@ -1,5 +1,6 @@
 <template>
   <div class="card">
+    <h2>Войдите в систему</h2>
     <form @submit.prevent="submit" autocomplete="off">
       <div class="form-control">
         <label>Введите email</label>

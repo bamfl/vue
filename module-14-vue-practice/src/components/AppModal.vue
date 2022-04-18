@@ -2,7 +2,10 @@
   <div class="modal-backdrop" @click="$emit('close-modal')">
     <div class="modal" @click.stop>
       <h3>Создать заявку</h3>
-      <CreateOrderForm @close-form="$emit('close-modal')"/>
+      <CreateOrderForm
+        @close-form="$emit('close-modal')"
+        @create-order="$emit('create-order')"
+      />
     </div>
   </div>
 </template>

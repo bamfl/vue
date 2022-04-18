@@ -10,9 +10,9 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     component: () => import('../layouts/MainLayout.vue'),
     children: [
-      { path: '/', component: () => import('../views/OrdersPage.vue') },
+      { path: '/', component: () => import('../views/OrdersPage.vue'), alias: '/orders' },
       { path: '/help', component: () => import('../views/HelpPage.vue') },
-      { path: '/orders', component: () => import('../views/OrdersPage.vue') }
+      { path: '/orders/:orderId', component: () => import('../views/OrderPage.vue'), props: true }
     ]
   },
   {

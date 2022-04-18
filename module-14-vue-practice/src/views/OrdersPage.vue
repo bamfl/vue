@@ -5,7 +5,6 @@
   </AppAlert>
 
   <div class="card">
-    !!!!!!{{ alert }}
     <div class="row justify-between items-center">
       <h1>Заявки</h1>
       <button class="btn primary" @click="isModalOpened = true">Создать</button>
@@ -50,8 +49,12 @@
           <td>{{ order.fullName }}</td>
           <td>{{ order.phone }}</td>
           <td>{{ (+order.amount as number).toFixed(2) }} ₽</td>
-          <td><div :class="['badge', order.status]">{{ EStatus[`${order.status}`] }}</div></td>
-          <td><button class="btn">Открыть</button></td>
+          <td>
+            <div :class="['badge', order.status]">{{ EStatus[`${order.status}`] }}</div>
+          </td>
+          <td>
+            <button class="btn" @click="$router.push(`/orders/${order.id}`)">Открыть</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -65,7 +68,7 @@ import { computed, onMounted, ComputedRef, ref, Ref } from 'vue'
 import { IOrder, EStatus } from '@/types'
 import { useStore } from '@/store'
 
-const alert: Ref<boolean> | Ref<null> = ref(false)
+const alert: Ref<boolean> | Ref<null> = ref(null)
 
 const isModalOpened = ref(false)
 const store = useStore()
