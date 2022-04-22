@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import { store } from '../store'
-import MainLayout from '@/layouts/MainLayout.vue'
 import { computed } from 'vue'
+import MainLayout from '@/layouts/MainLayout.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -17,7 +17,8 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/product/:id',
         name: 'Product',
-        component: () => import('../views/ProductPage.vue')
+        component: () => import('../views/ProductPage.vue'),
+        props: true
       },
       {
         path: '/cart',

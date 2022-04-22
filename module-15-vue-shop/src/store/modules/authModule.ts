@@ -3,11 +3,11 @@ import { IUser } from '@/types'
 import { Module } from 'vuex'
 import { RootState } from '../index'
 
-interface AuthState {
+interface IAuthState {
   isAuth: boolean
 }
 
-export const authModule: Module<AuthState, RootState> = {
+export const authModule: Module<IAuthState, RootState> = {
   namespaced: true,
   state: {
     isAuth: JSON.parse(localStorage.getItem('isAuth') as string) || false
@@ -18,18 +18,18 @@ export const authModule: Module<AuthState, RootState> = {
     }
   },
   mutations: {
-    loginAuth(state) {
+    login(state) {
       state.isAuth = true
       localStorage.setItem('isAuth', JSON.stringify(true))
     }
   },
   actions: {
-    async login({ commit }, { email, password }) {
+    async loginRequest({ commit }, { email, password }) {
       const { data } = await axiosInstance.get('/users')
 
       data.forEach((obj: IUser) => {
         if (obj.password === password && obj.email === email) {
-          commit('loginAuth', { root: true })
+          commit('login', { root: true })
         } else {
           commit('setAlert', { type: 'danger', title: 'Ошибка!', message: 'Такого пользователя не существует!' }, { root: true })
         }

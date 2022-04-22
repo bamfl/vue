@@ -9,3 +9,12 @@ export interface IUser {
   email: string
   password: string
 }
+
+export interface IProduct {
+  id?: string,
+  count: number,
+  title: string,
+  category: string,
+  price: number,
+  img: string
+}

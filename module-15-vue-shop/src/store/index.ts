@@ -2,6 +2,7 @@ import { IAlert } from '@/types'
 import { InjectionKey } from 'vue'
 import { createStore, useStore as baseUseStore, Store } from 'vuex'
 import { authModule } from './modules/authModule'
+import { shopModule } from './modules/shopModule'
 
 export interface RootState {
   alert: IAlert
@@ -12,7 +13,8 @@ export const key: InjectionKey<Store<RootState>> = Symbol()
 
 export const store = createStore<RootState>({
   modules: {
-    auth: authModule
+    auth: authModule,
+    shop: shopModule
   },
   state: {
     alert: null

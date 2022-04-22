@@ -26,7 +26,7 @@ export function useLoginForm() {
   )
 
   const submit = handleSubmit(async loginObj => {
-    await store.dispatch('auth/login', loginObj)
+    await store.dispatch('auth/loginRequest', loginObj)
     router.push('/')
   })
 

@@ -31,7 +31,7 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 // const CART_MODEL = {
 //   2: 3,
 //   5: 1
