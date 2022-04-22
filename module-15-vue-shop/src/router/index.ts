@@ -7,7 +7,24 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Main',
-    component: MainLayout
+    component: MainLayout,
+    children: [
+      {
+        path: '/',
+        name: 'Shop',
+        component: () => import('../views/ShopPage.vue')
+      },
+      {
+        path: '/product/:id',
+        name: 'Product',
+        component: () => import('../views/ProductPage.vue')
+      },
+      {
+        path: '/cart',
+        name: 'Cart',
+        component: () => import('../views/CartPage.vue')
+      }
+    ]
   },
   {
     path: '/auth',

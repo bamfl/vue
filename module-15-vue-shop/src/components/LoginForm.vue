@@ -1,4 +1,9 @@
 <template>
+  <AppAlert v-if="alert" :type="alert.type" @close="deleteAlert">
+    <template #title>{{ alert.title }}</template>
+    <template #message>{{ alert.message }}</template>
+  </AppAlert>
+
   <div class="card">
     <h2>Войдите в систему</h2>
 
@@ -21,9 +26,16 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useStore } from '../store'
 import { useLoginForm } from '../use/loginForm'
+import AppAlert from './AppAlert.vue'
 
-const { email, password, eEmail, ePassword, eBlur, pBlur, submit, isValidForm } = useLoginForm()
+const store = useStore()
+
+const alert = computed(() => store.getters.alert)
+
+const { email, password, eEmail, ePassword, eBlur, pBlur, submit, isValidForm, deleteAlert } = useLoginForm()
 </script>
 
 <style scoped></style>

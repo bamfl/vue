@@ -32,17 +32,10 @@
 </template>
 
 <script>
-const CART_MODEL = {
-  '2': 3,
-  '5': 1
-}
-
-export default {
-  setup() {
-  }
-}
+// const CART_MODEL = {
+//   2: 3,
+//   5: 1
+// }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

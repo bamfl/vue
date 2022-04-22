@@ -410,23 +410,33 @@ h3 {
     display: flex;
 }
 
-.navbar-menu li {
+.navbar-menu {
     margin-right: 2rem;
     display: flex;
     align-items: center;
 }
 
-.navbar-menu li a {
+.navbar-menu a {
     color: #2c3e50;
     text-decoration: none;
+    margin-right: 20px;
+    position: relative;
 }
 
-.navbar-menu li span {
+.navbar-menu span {
     margin-left: .5rem;
 }
 
-.navbar-menu li a:hover, .navbar-menu li a.active {
-    border-bottom: 2px solid #3eaf7c;
+.navbar-menu a:hover, .navbar-menu a.active {
+    &::after {
+      content:'';
+      position: absolute;
+      background:#3eaf7c;
+      width: 100%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+    }
 }
 
 .card-title {

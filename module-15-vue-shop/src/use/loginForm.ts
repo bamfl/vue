@@ -32,6 +32,10 @@ export function useLoginForm() {
 
   const isValidForm = computed(() => !eEmail.value && !ePassword.value)
 
+  function deleteAlert() {
+    store.commit('deleteAlert')
+  }
+
   return {
     email,
     password,
@@ -40,6 +44,7 @@ export function useLoginForm() {
     eBlur,
     pBlur,
     submit,
-    isValidForm
+    isValidForm,
+    deleteAlert
   }
 }
