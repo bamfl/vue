@@ -1,12 +1,9 @@
 <template>
   <div class="card">
-    <div v-for="product in products" :key="product.id" class="product-card">
-      {{ `/product/${product.id}` }}
-      <div class="product-img">
-        <img :src="product.img" alt="Product image">
+    <div class="row">
+      <div v-for="product in products" :key="product.id" class="col">
+        <ShopCard :product="product" />
       </div>
-      <div class="product-title">{{ product.title }}</div>
-      <button class="btn" @click="$router.push(`/product/${product.id}`)">Открыть</button>
     </div>
   </div>
 </template>
@@ -15,6 +12,7 @@
 import { computed, onMounted, ComputedRef } from 'vue'
 import { useStore } from '@/store'
 import { IProduct } from '@/types'
+import ShopCard from '@/components/ShopCard.vue'
 
 const store = useStore()
 const products: ComputedRef<IProduct[]> = computed(() => store.getters['shop/products'])

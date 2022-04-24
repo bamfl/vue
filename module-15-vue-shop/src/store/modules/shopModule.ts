@@ -6,13 +6,15 @@ import { IProduct } from '@/types'
 interface IShopState {
   products: IProduct[] | null
   oneProduct: IProduct | null
+  cartProducts: IProduct[] | null
 }
 
 export const shopModule: Module<IShopState, RootState> = {
   namespaced: true,
   state: {
     products: null,
-    oneProduct: null
+    oneProduct: null,
+    cartProducts: null
   },
   getters: {
     products(state) {
@@ -20,6 +22,15 @@ export const shopModule: Module<IShopState, RootState> = {
     },
     oneProduct(state) {
       return state.oneProduct
+    },
+    cartProducts(state) {
+      return state.cartProducts
+    },
+    priceAmount(state) {
+      if (state.cartProducts) {
+        return state.cartProducts.reduce((acc, curr) => +acc + +curr.price, 0)
+      }
+      return 0
     }
   },
   mutations: {
@@ -28,6 +39,24 @@ export const shopModule: Module<IShopState, RootState> = {
     },
     setOneProduct(state, product) {
       state.oneProduct = product
+    },
+    addProductToCart(state, product) {
+      if (!state.cartProducts) {
+        state.cartProducts = []
+      }
+
+      if (!state.cartProducts.some((prod: IProduct) => prod.id === product.id)) {
+        state.cartProducts.push({ ...product, count: 1 })
+      }
+    },
+    setProductCartCount(state, { id, count }) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      state.cartProducts!.find(prod => prod.id === id)!.count = count
+    },
+    deleteProductFromCart(state, product) {
+      if (state.cartProducts) {
+        state.cartProducts = state.cartProducts.filter(prod => prod.id !== product.id)
+      }
     }
   },
   actions: {

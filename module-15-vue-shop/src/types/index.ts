@@ -11,10 +11,11 @@ export interface IUser {
 }
 
 export interface IProduct {
-  id?: string,
-  count: number,
-  title: string,
-  category: string,
-  price: number,
+  id?: string
+  count: number
+  title: string
+  category: string
+  price: number
   img: string
+  isInCart?: boolean
 }
