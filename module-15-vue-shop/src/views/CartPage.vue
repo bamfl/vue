@@ -37,21 +37,24 @@ import CartProduct from '../components/CartProduct.vue'
 import { useStore } from '@/store'
 import { computed, ref } from 'vue'
 import { IProduct } from '@/types'
+import { useFormatPrice } from '@/use/formatPrice'
 
 const store = useStore()
 const cartProducts = computed(() => store.getters['shop/cartProducts'])
-const amount = ref(0)
+const amount = ref('0')
 
 getAmount()
 
 function getAmount() {
-  amount.value = 0
+  let accum = 0
 
   if (cartProducts.value) {
     cartProducts.value.forEach((product: IProduct) => {
-      amount.value += product.count * product.price
+      accum += product.count * product.price
     })
   }
+
+  amount.value = useFormatPrice(accum)
 }
 </script>
 

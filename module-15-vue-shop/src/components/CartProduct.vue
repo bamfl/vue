@@ -13,6 +13,7 @@
 <script setup lang="ts">
 import { useStore } from '@/store'
 import { IProduct } from '@/types'
+import { useFormatPrice } from '@/use/formatPrice'
 import { ref, computed } from 'vue'
 
 interface Props {
@@ -28,7 +29,7 @@ const emit = defineEmits(['updateAmount'])
 const store = useStore()
 const count = ref(props.product.count)
 
-const priceByCount = computed(() => count.value * props.product.price)
+const priceByCount = computed(() => useFormatPrice(count.value * props.product.price))
 
 function growCount() {
   count.value++
