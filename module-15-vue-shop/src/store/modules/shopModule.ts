@@ -25,12 +25,6 @@ export const shopModule: Module<IShopState, RootState> = {
     },
     cartProducts(state) {
       return state.cartProducts
-    },
-    priceAmount(state) {
-      if (state.cartProducts) {
-        return state.cartProducts.reduce((acc, curr) => +acc + +curr.price, 0)
-      }
-      return 0
     }
   },
   mutations: {

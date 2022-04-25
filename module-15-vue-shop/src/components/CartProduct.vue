@@ -22,6 +22,9 @@ interface Props {
 // eslint-disable-next-line no-undef
 const props = defineProps<Props>()
 
+// eslint-disable-next-line no-undef
+const emit = defineEmits(['updateAmount'])
+
 const store = useStore()
 const count = ref(props.product.count)
 
@@ -30,6 +33,8 @@ const priceByCount = computed(() => count.value * props.product.price)
 function growCount() {
   count.value++
   store.commit('shop/setProductCartCount', { id: props.product.id, count: count.value })
+
+  emit('updateAmount')
 }
 
 function decreaseCount(product: IProduct) {
@@ -42,6 +47,8 @@ function decreaseCount(product: IProduct) {
   if (count.value > 0) {
     store.commit('shop/setProductCartCount', { id: props.product.id, count: count.value })
   }
+
+  emit('updateAmount')
 }
 </script>
 
